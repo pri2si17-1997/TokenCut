@@ -117,7 +117,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.image_path is not None:
-        args.save_predictions = False
+        args.save_predictions = True
         args.no_evaluation = True
         args.dataset = None
 
@@ -312,7 +312,8 @@ if __name__ == "__main__":
     if args.save_predictions:
         folder = f"{args.output_dir}/{exp_name}"
         os.makedirs(folder, exist_ok=True)
-        filename = os.path.join(folder, "preds.pkl")
+        pickle_file_name = f"preds_{im_name}.pkl"
+        filename = os.path.join(folder, pickle_file_name)
         with open(filename, "wb") as f:
             pickle.dump(preds_dict, f)
         print("Predictions saved at %s" % filename)
